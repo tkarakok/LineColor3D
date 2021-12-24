@@ -9,4 +9,10 @@ public class GameManager : Singleton<GameManager>
 
     public int CurrentCoin { get => _currentCoin; set => _currentCoin = value; }
     public int TotalCoin { get => _totalCoin; set => _totalCoin = value; }
+
+    private void Start()
+    {
+        //TotalCoin = PlayerPrefs.GetInt("Coin");
+        TotalCoin = 10;
+    }
 }

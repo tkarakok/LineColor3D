@@ -6,7 +6,6 @@ public enum State
 {
     MainMenu,
     InGame,
-    Pause,
     Shop,
     GameOver,
     EndGame,

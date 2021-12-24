@@ -13,6 +13,7 @@ public class PlayerCollisionController : MonoBehaviour
         else if (other.CompareTag("Finish"))
         {
             StateManager.Instance.state = State.EndGame;
+            PlayerPrefs.SetInt("Level", LevelManager.Instance.CurrentLevel + 1);
         }
         else if (other.CompareTag("Coin"))
         {

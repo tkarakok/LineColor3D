@@ -7,7 +7,6 @@ public class EventManager : Singleton<EventManager>
     public delegate void StateActions();
     public event StateActions MainMenuEvent;
     public event StateActions InGameEvent;
-    public event StateActions PauseEvent;
     public event StateActions GameOverEvent;
     public event StateActions EndGameEvent;
     public event StateActions ShopEvent;
@@ -16,6 +15,29 @@ public class EventManager : Singleton<EventManager>
     private void Awake()
     {
         // subscribes 
+
+        #region MainMenu Event Subscribe
+        MainMenuEvent += UIManager.Instance.MainMenuUIUpdate;
+        #endregion
+
+        #region InGame Event Subscribe
+        InGameEvent += UIManager.Instance.ChangeMainMenuToInGame;
+        #endregion
+
+        #region GameOver Event Subscribe
+        GameOverEvent += UIManager.Instance.GameOverUIUpdate;
+        GameOverEvent += UIManager.Instance.ChangeInGameToGameOver;
+        #endregion
+
+        #region EndGame Event Subscribe
+        EndGameEvent += UIManager.Instance.EndGameUIUpdate;
+        EndGameEvent += UIManager.Instance.ChangeInGameToEndGame;
+        #endregion
+
+        #region Shop Event Subscribe
+        MainMenuEvent += UIManager.Instance.ShopUIUpdate;
+        ShopEvent += UIManager.Instance.ChangeMainMenuToShop;
+        #endregion
     }
 
     private void Update()
@@ -27,9 +49,6 @@ public class EventManager : Singleton<EventManager>
                 break;
             case State.InGame:
                 InGameEvent();
-                break;
-            case State.Pause:
-                PauseEvent();
                 break;
             case State.Shop:
                 ShopEvent();
