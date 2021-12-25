@@ -17,6 +17,7 @@ public class EventManager : Singleton<EventManager>
         // subscribes 
 
         #region MainMenu Event Subscribe
+        MainMenuEvent += UIManager.Instance.ChangeShopPanelToMainMenu;
         MainMenuEvent += UIManager.Instance.MainMenuUIUpdate;
         #endregion
 
@@ -35,7 +36,7 @@ public class EventManager : Singleton<EventManager>
         #endregion
 
         #region Shop Event Subscribe
-        MainMenuEvent += UIManager.Instance.ShopUIUpdate;
+        ShopEvent += UIManager.Instance.ShopUIUpdate;
         ShopEvent += UIManager.Instance.ChangeMainMenuToShop;
         #endregion
     }

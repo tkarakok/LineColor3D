@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
-    public GameObject mainMenuPanel, inGamePanel, gameOverPanel, endGamePanel, shopPanel;
+    public GameObject mainMenuPanel, inGamePanel, gameOverPanel, endGamePanel, shopPanel, settingsBar;
     public Text levelText, mainMenuCoinText, gameOverCoinText, endGameEarnedCoinText, endGameTotalCoinText, shopCoinText, gameOverCompleteText;
     public Slider levelProgressBar;
-   
+    public Animator mainMenuAnimator,gameOverAnimator,endGameAnimator;
     
     private void Start()
     {
@@ -30,13 +30,34 @@ public class UIManager : Singleton<UIManager>
         StateManager.Instance.state = State.InGame;
         
     }
+    public void SettingsButton()
+    {
+        if (settingsBar.activeInHierarchy)
+        {
+            mainMenuAnimator.SetBool("IsClicked",false);
+        }
+        else
+        {
+            mainMenuAnimator.SetBool("IsClicked", true);
+        }
+        
+    }
+    public void ShopButton()
+    {
+        StateManager.Instance.state = State.Shop;
+    }
+    public void CloseShop()
+    {
+        StateManager.Instance.state = State.MainMenu;
+    }
     public void RestartButton()
     {
         LevelManager.Instance.ChangeLevel("LEVEL " + LevelManager.Instance.CurrentLevel);
     }
     public void NextLevelButton()
     {
-        LevelManager.Instance.ChangeLevel("LEVEL " + LevelManager.Instance.CurrentLevel);
+        endGameAnimator.SetBool("Collect",true);
+        StartCoroutine(WaitForEndAnim());
     }
     #endregion
 
@@ -50,6 +71,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void ChangeMainMenuToShop()
     {
+
         mainMenuPanel.SetActive(false);
         shopPanel.SetActive(true);
     }
@@ -65,6 +87,12 @@ public class UIManager : Singleton<UIManager>
         ChangeSliderParent(endGamePanel.transform);
         inGamePanel.SetActive(false);
         endGamePanel.SetActive(true);
+    }
+    // Shop panel
+    public void ChangeShopPanelToMainMenu()
+    {
+        mainMenuPanel.SetActive(true);
+        shopPanel.SetActive(false);
     }
 
     #endregion
@@ -93,6 +121,16 @@ public class UIManager : Singleton<UIManager>
     }
     #endregion
 
+
+    
+    IEnumerator WaitForEndAnim()
+    {
+        yield return new WaitForSeconds(.5f);
+        GameManager.Instance.TotalCoin = PlayerPrefs.GetInt("Coin");
+        endGameTotalCoinText.text = GameManager.Instance.TotalCoin.ToString();
+        yield return new WaitForSeconds(1.5f);
+        LevelManager.Instance.ChangeLevel("LEVEL " + LevelManager.Instance.CurrentLevel);
+    }
 
 
 }

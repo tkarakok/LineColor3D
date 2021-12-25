@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    public ParticleSystem finishBurstCoin;
+
     private int _currentCoin;
     private int _totalCoin;
 
@@ -12,7 +14,6 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        //TotalCoin = PlayerPrefs.GetInt("Coin");
-        TotalCoin = 10;
+        TotalCoin = PlayerPrefs.GetInt("Coin");
     }
 }
