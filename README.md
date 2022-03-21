@@ -1,2 +1,24 @@
-# LineColor3D
- ne whyper casual project from vodoo (clone game)
+
+# LINE COLOR 3D
+
+LINE COLOR PROTOTYPE PROJECT
+
+
+
+## GAMEPLAY VIDEO
+
+
+[![IMAGE ALT TEXT HERE](https://i.imgur.com/PaJ2UE9.png)](https://youtu.be/bZYjKkz7Ho4)
+
+
+
+
+## WHAT I USE IN THE PROJECT
+
+**ENGINE:** UNITY 3D
+
+**LANGUAGE:** C#
+
+**ASSETS:** UNITY ASSET STORE
+
+  
